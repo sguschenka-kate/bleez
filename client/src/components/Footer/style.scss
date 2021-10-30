@@ -1,0 +1,134 @@
+@import '../../scss/mixins';
+
+.footer {
+    margin-top: 40px;
+    padding: 40px 0;
+    background: #000;
+
+    &__container {
+        max-width: 1500px;
+        margin: 0 auto;
+    }
+
+    &__top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    &__bottom {
+        padding: 30px 0;
+        border-top: 1px solid rgba(255,255,255,.3);
+        margin-top: 80px;
+    }
+}
+
+.subscribe {
+    padding: 0 150px;
+    max-width: 50%;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,.3);
+
+    &__title {
+        color: var(--white-color);
+    }
+
+    &__email-container {
+        margin-top: 60px;
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+    }
+
+    &__input {
+        background: transparent;
+        flex: 1 0;
+        padding: 9px 15px;
+        outline: none;
+        color: var(--white-color);
+        border: 1px solid var(--white-color);
+        transition: box-shadow .2s ease-in-out;
+        @include make-font(14,20)
+    }
+
+    &__input:focus {
+        box-shadow: 0 0 22px -6px var(--white-color)
+    }
+
+    &__button {
+        color: var(--white-color);
+        cursor: pointer;
+        padding: 10px 15px;
+        border: 1px solid var(--white-color);
+        background: transparent;
+        @include make-font(16,20);
+        transition: all .2s ease-in-out;
+    }
+
+    &__button:hover {
+        background: var(--white-color);
+        font-weight: 600;
+        color: #000;
+    }
+
+    &__text {
+        color: var(--white-color);
+        @include make-font(13, 20);
+        opacity: 0.7x;
+        margin-top: 40px;
+    }
+}
+
+.social-media {
+    max-width: 50%;
+    text-align: center;
+    flex: 1 0;
+
+    &__title {
+        color: var(--white-color);
+    }
+
+    &__link {
+        color: var(--white-color);
+    }
+}
+
+
+.logo--white-color {
+    color: var(--white-color);
+}
+
+.footer-navbar {
+    
+    &__list {
+        margin-left: 45px;
+        flex: 1 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        flex-wrap: wrap;
+    }
+
+    &__item {
+        display: block;
+    }
+
+}
+
+.footer-links {
+    &__item:not(:first-child) {
+        margin-top: 20px;
+        
+    }
+    &__item, &__link {
+        color: var(--white-color);
+        @include make-font(15,20);
+        transition: all .2s ease-in-out;
+    }
+
+    &__link:hover {
+        color: #d9cfc0;
+    }
+}
+

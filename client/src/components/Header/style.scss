@@ -1,0 +1,149 @@
+@import '../../scss/mixins';
+
+.header {
+    background-color: var(--white-color);
+    position: sticky;
+    top: 0;
+    z-index: 99;
+
+    &-container {
+      max-width: 1440px;
+      margin: 0 auto
+    }
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    max-width: 200px;
+    height: 100%;
+    @include make-font(35, 60);
+    font-weight: 600;
+}
+  
+.navbar {
+    flex: 1 0;
+    margin-left: 45px;
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__item {
+        display: flex;
+    }
+
+    &__item--bottom {
+        justify-content: space-between;
+        padding: 23px 0;
+      }
+
+    &__item--top {
+        padding: 10px 0;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+}
+
+
+.header-links {
+    
+    &__list {
+        display: flex;    
+        height: 100%;
+        padding-inline-start: 0
+    }
+    
+    &__item:not(:first-child) {
+        margin-left: 10px;
+      }
+
+    &__link {
+      @include make-font(13, 20);
+      font-weight: 400;
+    }
+  }
+
+
+.header-categories {
+
+    &__list {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-inline-start: 20px
+    }
+
+    &__item {
+      position: relative;
+      height: 30px;
+    }
+    
+    &__links {
+      position: absolute;
+      top: 30px;
+      height: 0;
+      width: 100%;
+      font-weight: 400;
+      visibility: hidden;
+      transition: height 0.4s ease-in-out;
+      background: var(--white-color);
+    }
+
+    &__link {
+        display: block;
+      }
+    &__link--main {
+      @include make-font(16, 19);
+      font-weight: 500;
+      display: block;
+      padding: 4px;
+    }
+      
+    &__item:not(:first-child) {
+        margin-left: 10px;
+      }
+    
+    &__item:hover &__links {
+        visibility: visible;
+        height: fit-content;
+        width: fit-content;
+        padding: 10px;
+      }
+}
+
+.header-icons {
+    
+      &__list {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      
+    &__item:not(:first-child) {
+        margin-left: 20px;
+      }
+
+          
+    &__link {
+        display: block;
+        height: 100%;
+        width: 100%;
+      } 
+
+    &__link i {
+        @include make-font(25, 25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+  
+
+  

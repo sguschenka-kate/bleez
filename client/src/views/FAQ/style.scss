@@ -1,0 +1,31 @@
+@import '../../scss/mixins';
+
+.faq {
+
+    &__section {
+        margin-top: 20px;
+    }
+
+    &__h2 {
+        padding: 20px 0;
+        margin-block-start: 0;
+        margin-block-end: 0;
+    }
+
+    &__title {
+        @include make-font(19,25)
+    }
+
+    &__text {
+        @include make-font(14,22)
+    }
+
+    &__item {
+        margin-top: 31px;
+    }
+
+    &__list-style-disc {
+        list-style: disc;
+        margin-left: 40px;
+    }
+}

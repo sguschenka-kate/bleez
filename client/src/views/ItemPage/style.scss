@@ -1,0 +1,113 @@
+@import '../../scss/mixins';
+
+.item-page {
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding-bottom: 100px;
+    }
+
+    &__slider {
+        min-width: 50%;
+    }
+
+    &__slider-image {
+        width: 100%;
+    }
+
+    &__info-container {
+        min-width: 50%;
+        flex: 1 0;
+        margin-left: 40px
+    }
+
+    &__description, &__structure {
+        @include make-font(14,20);
+    }
+    
+    &__options-container {
+        margin-top: 30px;
+    }
+
+    &__options-list {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    &__options-title {
+        @include make-font(16,20);
+        font-weight: 900;
+    }
+
+    &__option:not(:first-child) {
+        margin-left: 10px;
+    }
+
+    &__option-button {
+        padding: 7px 10px;
+        background: #fff;
+        color: #000;
+        border: 0.1px solid #000;
+        @include make-font(14,20);
+        border-radius: 2px;
+        transition: all .2s ease-in-out;
+    }
+    
+    &__option-button--active {
+        background: #000;
+        color: #fff;
+    }
+
+    &__price {
+        @include make-font(24,20);
+        font-weight: 600;
+        margin-top: 30px;
+    }
+
+    &__figure {
+        background-repeat: no-repeat;
+        background-size: 200%;
+    }
+
+    &__figure:hover &__image {
+        opacity: 0;
+    }
+
+    &__image {
+        display: block;
+        width: 100%;
+        pointer-events: none;
+    }
+
+    &__button {
+        margin-top: 40px;
+    }
+
+    &--similar {
+        margin-top: 50px;
+    }
+}
+
+.similar {
+    &__title {
+        @include make-font(35, 35)
+    }
+
+    &__list {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+}
+
+.slick-dots {
+    bottom: -75px;
+
+    & li {
+        width: 90px;
+    }
+}
