@@ -1,4 +1,0 @@
-@mixin make-font($font-size, $line-height) {
-    font-size: $font-size+px;
-    line-height: $line-height/$font-size;
-}
