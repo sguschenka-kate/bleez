@@ -1,24 +1,52 @@
 require('dotenv').config()
 const express = require('express')
+const mysql = require('mysql');
 
 const app = express()
-
 const PORT = process.env.PORT
 
-app.listen(PORT, ()=>{
-    console.log(`Application listening on port ${PORT}`)
+// коннектимся к базе данных
+
+const connection = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'root',
+    database: 'bleez',
+    password : ''
+  });
+
+connection.connect(err => {
+    if (err) {
+        console.log(err)
+        return err
+    } else {
+        console.log('ok')
+    }
 })
 
-app.get('/shop', (req, res)=>{
-    res.send([
-        {id: 1, title: 'Теплий набір Lozi', img: 'images/socks.jpg', price: 250},
-        {id: 2, title: 'Теплий набір Lozi', img: 'images/socks.jpg', price: 250},
-        {id: 3, title: 'Теплий набір Lozi', img: 'images/socks.jpg', price: 250},
-        {id: 4, title: 'Теплий набір Lozi', img: 'images/socks.jpg', price: 250},
-        {id: 5, title: 'Теплий набір Lozi', img: 'images/socks.jpg', price: 250},
-        {id: 6, title: 'Теплий набір Lozi', img: 'images/socks.jpg', price: 250},
-        {id: 7, title: 'Теплий набір Lozi', img: 'images/socks.jpg', price: 250},
-        {id: 8, title: 'Теплий набір Lozi', img: 'images/socks.jpg', price: 250},
-        {id: 9, title: 'Теплий набір Lozi', img: 'images/socks.jpg', price: 250},
-    ])
+app.listen(PORT, () => {
+    console.log(`Example app listening at http://localhost:${PORT}`)
+  })
+
+// роуты и настройки, чтоб стучаться с фронта
+
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next()
+});
+
+app.get('/shop', async (req, res) =>{
+    connection.query("SELECT * FROM items", (err, result) =>{
+        if (err) throw err
+        console.log(result);
+        res.send(result);
+    })
+})
+
+app.get('/shop/:id', async (req, res) =>{
+    const id = req.params.id
+    connection.query("SELECT * FROM items WHERE id = ?", id, (err, result) =>{
+        if (err) throw err
+        console.log(result);
+        res.send(result);
+    });
 })
