@@ -25,7 +25,6 @@ function App() {
           <ItemsPage />
         </Route>
 
-
         <Route path="/privacy" >
           <PrivacyPage />
         </Route>
