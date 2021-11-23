@@ -1,52 +1,54 @@
-require('dotenv').config()
-const express = require('express')
-const mysql = require('mysql');
+// Import dotenv
+import dotenv  from "dotenv"
+// Import express
+import express from "express";
+// Import cors
+import cors from "cors";
+// Import connection
+import db from "./config/database.js";
+// Import clientRouter
+import clientRouter from "./routes/client.routes.js";
+// Import adminRouter
+import adminRouter from "./routes/admin.routes.js";
 
-const app = express()
+dotenv.config()
+
+// Init express
+const app = express();
+// use express json
+app.use(express.json());
+//options for cors
+const options = {
+    dotfiles: 'ignore',
+    etag: false,
+    extensions: ['htm', 'html'],
+    index: false,
+    maxAge: '1d',
+    redirect: false,
+    setHeaders: function (res, path, stat) {
+        res.set('Access-Control-Expose-Headers', 'X-Total-Count')
+    }
+}   
+  
+app.use(express.static('public', options))
+// use cors
+app.use(cors({
+    origin: '*'
+}));
+
 const PORT = process.env.PORT
 
-// коннектимся к базе данных
-
-const connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    database: 'bleez',
-    password : ''
-  });
-
-connection.connect(err => {
-    if (err) {
-        console.log(err)
-        return err
-    } else {
-        console.log('ok')
-    }
-})
-
-app.listen(PORT, () => {
-    console.log(`Example app listening at http://localhost:${PORT}`)
-  })
-
-// роуты и настройки, чтоб стучаться с фронта
-
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    next()
-});
-
-app.get('/shop', async (req, res) =>{
-    connection.query("SELECT * FROM items", (err, result) =>{
-        if (err) throw err
-        console.log(result);
-        res.send(result);
-    })
-})
-
-app.get('/shop/:id', async (req, res) =>{
-    const id = req.params.id
-    connection.query("SELECT * FROM items WHERE id = ?", id, (err, result) =>{
-        if (err) throw err
-        console.log(result);
-        res.send(result);
-    });
-})
+// Testing database connection 
+try {
+    await db.authenticate();
+    console.log('Connection has been established successfully.');
+} catch (error) {
+    console.error('Unable to connect to the database:', error);
+}
+ 
+// use router
+app.use(clientRouter);
+app.use('/admin', adminRouter);
+ 
+// listen on port
+app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
